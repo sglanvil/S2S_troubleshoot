@@ -45,10 +45,12 @@ ensoOBS=squeeze(nanmean(nanmean(raw(lon0>=190 & lon0<=240,abs(lat0)<=5,:),1),2))
 printName='ENSO_S2Stroubleshoot';
 subplot(2,1,1);
     hold on; grid on; box on;
-    plot(time,enso,'b','linewidth',2);
-    plot(timeOBS,ensoOBS,'k','linewidth',2);
-    legend('JRA55do-FO','HadISST','location','northwest');
-    ylabel('\bfENSO Index (\circC)');
+    plot([datetime('01-Jan-2000') datetime('31-Dec-2022')],[0 0],'k');
+    a(1)=plot(time,enso-nanmean(enso),'b','linewidth',2);
+    a(2)=plot(timeOBS,ensoOBS-nanmean(ensoOBS),'k','linewidth',2);
+    legend(a,'JRA55do-FO','HadISST','location','northwest');
+    title('\bfENSO (Nino3.4) Index');
+    ylabel('\bfAnomaly (\circC)');
     xlim(datetime([1999 2022],[1 12],[1 31])) % how to handle axis for datetime
     xticks(datetime('01-Jan-2000') : calyears(2) : datetime('31-Dec-2022'))
     xtickangle(45);
