@@ -25,7 +25,8 @@ sst=squeeze(ncread(fil,'TEMP_CUR'));
 enso=squeeze(nanmean(nanmean(sst(lon>=190 & lon<=240,abs(lat)<=5,:),1),2));
 
 % ------------------------------------------------------------ observations
-fil='/Users/sglanvil/Documents/CCR/meehl/data/HadISST_sst.nc';
+% https://www.metoffice.gov.uk/hadobs/hadisst/data/download.html (HadISST_sst.nc.gz)
+fil='/Users/sglanvil/Documents/CCR/meehl/data/HadISST_sst_197001-202206.nc';
 lon0=ncread(fil,'longitude');
 lat0=ncread(fil,'latitude');
 lon0(lon0<0)=lon0(lon0<0)+360;
@@ -35,7 +36,7 @@ raw(raw<0)=NaN; % --- remove negative values (probably ice flags)
 raw=raw(inx,:,:); % --- deal with some neg lon issues
 lon0=lon0(inx); % --- deal with some neg lon issues
 t1=datetime('15/Jan/1870');
-t2=datetime('15/Dec/2021');
+t2=datetime('15/Jun/2022');
 timeOBS=t1:t2;
 timeOBS=timeOBS(day(timeOBS)==15); % datetime monthly option
 ensoOBS=squeeze(nanmean(nanmean(raw(lon0>=190 & lon0<=240,abs(lat0)<=5,:),1),2));
